@@ -2,7 +2,6 @@
 
 Next Level Week from Rocketseat.
 
-
 ## References
 
 - [Official Page](https://nextlevelweek.com)
