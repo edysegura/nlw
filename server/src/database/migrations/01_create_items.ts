@@ -1,7 +1,9 @@
 import Knex from "knex";
 
+const tableName = 'items';
+
 export async function up(knex: Knex) {
-  return knex.schema.createTable('items', table => {
+  return knex.schema.createTable(tableName, table => {
     table.increments('id').primary();
     table.string('image').notNullable();
     table.string('title').notNullable();
@@ -9,5 +11,5 @@ export async function up(knex: Knex) {
 }
 
 export async function down(knex: Knex) {
-  return knex.schema.dropTable('point');
+  return knex.schema.dropTable(tableName);
 }
