@@ -5,10 +5,11 @@ export default class ItemController {
 
   static async index(request: Request, response: Response) {
     const items = await knex('items').select('*');
+    const baseUrl = `${request.protocol}://${request.headers.host}`;
 
     function imagePath(item: any) {
-      const baseUrl = `${request.protocol}://${request.headers.host}`
       return {
+        id: item.id,
         title: item.title,
         image_url: `${baseUrl}/uploads/${item.image}`
       };
