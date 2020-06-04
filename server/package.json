@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
+    "knex:seed": "knex --knexfile knexfile.ts seed:run",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "author": "Edy Segura",
