@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import Header from './Header';
 
 function App() {
+  const [counter, setCounter] = useState(0);
+
+  function handleButtonClick() {
+    setCounter(counter + 1);
+  }
+
   return (
     <div>
-      <Header title="Ecoleta" />
-      <h2>Application Content</h2>
+      <Header title={`Counter: ${counter}`} />
+      <h2>{counter}</h2>
+      <button onClick={handleButtonClick}>Click me!</button>
     </div>
   );
 }
