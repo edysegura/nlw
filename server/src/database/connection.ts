@@ -6,6 +6,10 @@ const connection = knex({
   connection: {
     filename: path.resolve(__dirname, 'database.sqlite'),
   },
+  pool: {
+    afterCreate: (connection: any, callback: Function) =>
+      connection.run('PRAGMA foreign_keys = ON', callback)
+  },
   useNullAsDefault: true,
 });
 

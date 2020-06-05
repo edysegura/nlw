@@ -78,8 +78,16 @@ export default class PointController {
       }
     });
 
-    await trx('point_items').insert(pointItems);
-    trx.commit();
+    try {
+      await trx('point_items').insert(pointItems);
+      trx.commit();
+    } catch (error) {
+      await trx.rollback();
+      return response.status(400)
+        .json({
+          message: 'Verify if the item informed is valid'
+        });
+    }
 
     return response.json({
       id: insertedPointId,
