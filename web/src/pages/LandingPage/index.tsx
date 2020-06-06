@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import './style.css';
 import logo from '../../assets/logo.svg';
 
-const Home = () => {
+const LandingPage = () => {
   return (
     <div id="page-home">
       <div className="content">
@@ -28,4 +28,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default LandingPage;
