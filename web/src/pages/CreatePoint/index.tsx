@@ -1,6 +1,6 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import logo from '../../assets/logo.svg';
@@ -42,6 +42,7 @@ const CreatePoint = () => {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0,0]);
 
+  const history = useHistory();
 
   useEffect(() => {
     api.get('items').then(response => {
@@ -105,6 +106,28 @@ const CreatePoint = () => {
     setSelectedItems(items);
   }
 
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const uf = selectedUf;
+    const city = selectedCity;
+    const [latitude, longitude] = selectedPosition;
+    const items = selectedItems;
+
+    const data = {
+      ...formData,
+      uf,
+      city,
+      latitude,
+      longitude,
+      items
+    };
+
+    await api.post('points', data);
+    alert('Ponto de coleta criado!');
+    history.push('/');
+  }
+
   return (
     <div id="page-create-point">
       <header>
@@ -116,7 +139,7 @@ const CreatePoint = () => {
         </Link>
       </header>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1>Cadastro do <br />ponto de coleta</h1>
 
         <fieldset>
